@@ -44,28 +44,28 @@ public class Data {
 
             // Personas
             Persona persona1 = new Persona();
-            persona1.setNombre("Yeison");
-            persona1.setApellido("Monsalve");
-            persona1.setSexo("Masculino");
+            persona1.setNombre("Diana");
+            persona1.setApellido("López");
+            persona1.setSexo("Femenino");
 
             Persona persona2 = new Persona();
-            persona2.setNombre("Pepe");
-            persona2.setApellido("El Gallo");
+            persona2.setNombre("Alex");
+            persona2.setApellido("Herrera");
             persona2.setSexo("Masculino");
 
             Persona persona3 = new Persona();
-            persona3.setNombre("Avril");
-            persona3.setApellido("Lavigne");
-            persona3.setSexo("Femenino");
+            persona3.setNombre("Samuel");
+            persona3.setApellido("Castro");
+            persona3.setSexo("Masculino");
 
             Persona persona4 = new Persona();
-            persona4.setNombre("Alex");
-            persona4.setApellido("Turner");
+            persona4.setNombre("Santiago");
+            persona4.setApellido("Herrera");
             persona4.setSexo("Masculino");
 
             Persona persona5 = new Persona();
-            persona5.setNombre("Hayley");
-            persona5.setApellido("Williams");
+            persona5.setNombre("Rebeca");
+            persona5.setApellido("Ramos");
             persona5.setSexo("Femenino");
 
             // Usuarios
@@ -91,14 +91,14 @@ public class Data {
 
             // Libros
             Libro libro1 = new Libro();
-            libro1.setAutor("Gabriel García Márquez");
-            libro1.setTitulo("Cien años de soledad");
-            libro1.setIsbn("23");
+            libro1.setAutor("Victor Hugo");
+            libro1.setTitulo("Los Miserables");
+            libro1.setIsbn("93");
 
             Libro libro2 = new Libro();
-            libro2.setAutor("John Green");
-            libro2.setTitulo("Looking for Alaska");
-            libro2.setIsbn("12");
+            libro2.setAutor("José Zorrilla");
+            libro2.setTitulo("Don Juan Tenorio");
+            libro2.setIsbn("72");
 
             Libro libro3 = new Libro();
             libro3.setAutor("Stephen Chbosky");
@@ -106,48 +106,48 @@ public class Data {
             libro3.setIsbn("43");
 
             Libro libro4 = new Libro();
-            libro4.setAutor("Gilmer Mesa");
-            libro4.setTitulo("Aranjuez");
-            libro4.setIsbn("76");
+            libro4.setAutor("Fiódor Dostoyevski;
+            libro4.setTitulo("Crimen y Castigo");
+            libro4.setIsbn("73");
 
             Libro libro5 = new Libro();
-            libro5.setAutor("Miguel de Cervantes");
-            libro5.setTitulo("Don Quijote de la Mancha");
-            libro5.setIsbn("90");
+            libro5.setAutor("Johann Wolfgang von Goethe");
+            libro5.setTitulo("Fausto");
+            libro5.setIsbn("100");
 
             // Prestamos
             Prestamo prestamo1 = new Prestamo();
             prestamo1.setIdUsuario(usuario1);
             prestamo1.setIdLibro(libro1);
-            prestamo1.setFechaPrestamo(formato.parse("2024-01-01"));
+            prestamo1.setFechaPrestamo(formato.parse("2024-07-11"));
             prestamo1.setFechaDevolucion(formato.parse("0000-00-00"));
             prestamo1.setActivo(true);
 
             Prestamo prestamo2 = new Prestamo();
             prestamo2.setIdUsuario(usuario2);
             prestamo2.setIdLibro(libro2);
-            prestamo2.setFechaPrestamo(formato.parse("2024-02-28"));
-            prestamo2.setFechaDevolucion(formato.parse("2024-03-28"));
+            prestamo2.setFechaPrestamo(formato.parse("2024-08-18"));
+            prestamo2.setFechaDevolucion(formato.parse("2024-06-08"));
             prestamo2.setActivo(false);
 
             Prestamo prestamo3 = new Prestamo();
             prestamo3.setIdUsuario(usuario3);
             prestamo3.setIdLibro(libro3);
-            prestamo3.setFechaPrestamo(formato.parse("2024-08-30"));
+            prestamo3.setFechaPrestamo(formato.parse("2024-04-20"));
             prestamo3.setFechaDevolucion(formato.parse("0000-00-00"));
             prestamo3.setActivo(true);
 
             Prestamo prestamo4 = new Prestamo();
             prestamo4.setIdUsuario(usuario4);
             prestamo4.setIdLibro(libro4);
-            prestamo4.setFechaPrestamo(formato.parse("2023-12-01"));
-            prestamo4.setFechaDevolucion(formato.parse("2024-04-12"));
+            prestamo4.setFechaPrestamo(formato.parse("2024-09-09"));
+            prestamo4.setFechaDevolucion(formato.parse("2024-04-19"));
             prestamo4.setActivo(false);
 
             Prestamo prestamo5 = new Prestamo();
             prestamo5.setIdUsuario(usuario5);
             prestamo5.setIdLibro(libro5);
-            prestamo5.setFechaPrestamo(formato.parse("2023-06-28"));
+            prestamo5.setFechaPrestamo(formato.parse("2023-09-27"));
             prestamo5.setFechaDevolucion(formato.parse("0000-00-00"));
             prestamo5.setActivo(true);
 
