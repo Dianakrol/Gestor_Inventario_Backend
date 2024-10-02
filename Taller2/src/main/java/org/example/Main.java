@@ -18,140 +18,215 @@ public class Main {
     public static void main(String[] args) throws Exception {
         DatabaseConnection dbconnect = new DatabaseConnection();
         dbconnect.connectDb();
+
         Data addData = new Data();
         addData.enterData();
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese los datos para crear la persona:");
-        Persona persona = new Persona();
-
-        System.out.println("Ingrese el nombre:");
-        String nombre = scanner.nextLine();
-        persona.setNombre(nombre);
-
-        System.out.println("Ingrese el apellido:");
-        String apellido = scanner.nextLine();
-        persona.setApellido(apellido);
-
-        System.out.println("Ingrese el sexo:");
-        String sexo = scanner.nextLine();
-        persona.setSexo(sexo);
-
-        // Crear instancia del DAO y guardar la persona
         PersonaDao personaDao = new PersonaDao();
-        personaDao.crearPersona(persona); // Método para guardar la persona en la base de datos.
-
-        System.out.println("Persona guardada exitosamente.");
-
-        /////////////////////////////////////////////
-
-        System.out.println("Ingrese los datos para crear el usuario:");
-        Usuario usuario = new Usuario();
-
-        System.out.println("Ingrese el rol:");
-        String rol = scanner.nextLine();
-        usuario.setRol(rol);
-
-        // Asignar la persona creada al usuario
-        usuario.setIdPersona(persona);
-
-        // Crear instancia del DAO y guardar el usuario
         UsuarioDao usuarioDao = new UsuarioDao();
-        usuarioDao.crearUsuario(usuario); // Método para guardar el usuario en la base de datos.
-
-        System.out.println("Usuario creado exitosamente.");
-
-        /////////////////////////////////////////////
-
-        System.out.println("Ingrese los datos para crear el libro:");
-        Libro libro = new Libro();
-
-        System.out.println("Ingrese el título:");
-        String titulo = scanner.nextLine();
-        libro.setTitulo(titulo);
-
-        System.out.println("Ingrese el autor del libro:");
-        String autor = scanner.nextLine();
-        libro.setAutor(autor);
-
-        System.out.println("Ingrese el isbn del libro:");
-        String isbn = scanner.nextLine();
-        libro.setIsbn(isbn);
-
-        // Crear instancia del DAO y guardar el libro
         LibroDao libroDao = new LibroDao();
-        libroDao.crearLibro(libro); // Método para guardar el libro en la base de datos.
+        PrestamoDao prestamoDao = new PrestamoDao();
 
-        System.out.println("Libro creado exitosamente.");
+        System.out.println("¿DESEA AGREGAR UNA PERSONA A LA BASE DE DATOS? (si/no)");
+
+        String createPerson = scanner.nextLine().toLowerCase();
+
+        if (createPerson.equals("si")) {
+
+            Persona persona = new Persona();
+            System.out.println("Ingrese el nombre:");
+            String nombre = scanner.nextLine();
+            persona.setNombre(nombre);
+
+            System.out.println("Ingrese el apellido:");
+            String apellido = scanner.nextLine();
+            persona.setApellido(apellido);
+
+            System.out.println("Ingrese el sexo:");
+            String sexo = scanner.nextLine();
+            persona.setSexo(sexo);
+
+
+            Usuario usuario = new Usuario();
+            System.out.println("USUARIO DE LA PERSONA A CREAR.");
+            System.out.println("Ingrese el rol del usuario:");
+            String rol = scanner.nextLine();
+            usuario.setRol(rol);
+
+            usuario.setIdPersona(persona);
+
+            personaDao.crearPersona(persona);
+            usuarioDao.crearUsuario(usuario);
+
+            System.out.println("Tanto la persona y el usuario fueron creados exitosamente.");
+        } else {
+            System.out.println("No se creo ninguna persona o usuario nueva a la base de datos.");
+        }
 
         /////////////////////////////////////////////
 
-        // Actualizar libro.
-        System.out.println("Ingrese el Id del libro a actualizar:");
-        String libroIdStr = scanner.nextLine();
-        int libroId = Integer.parseInt(libroIdStr); // Convertir el ID a int
+        System.out.println("¿DESEA AGREGAR UN LIBRO? (si/no)");
+        String createBook = scanner.nextLine().toLowerCase();
 
-        // Obtener el libro desde la base de datos
-        Libro libroActualizar = libroDao.obtenerLibroId(libroId);
+        if (createBook.equals("si")) {
+            Libro libro = new Libro();
 
-        if (libroActualizar != null) {
-            // Modificar los atributos del libro
-            System.out.println("Ingrese el nuevo título (deje en blanco si no desea cambiarlo):");
-            String nuevoTitulo = scanner.nextLine();
-            if (!nuevoTitulo.isEmpty()) {
-                libroActualizar.setTitulo(nuevoTitulo);
-            }
+            System.out.println("Ingrese el título del libro:");
+            String titulo = scanner.nextLine();
+            libro.setTitulo(titulo);
 
-            System.out.println("Ingrese el nuevo autor (deje en blanco si no desea cambiarlo):");
-            String nuevoAutor = scanner.nextLine();
-            if (!nuevoAutor.isEmpty()) {
-                libroActualizar.setAutor(nuevoAutor);
-            }
+            System.out.println("Ingrese el autor del libro:");
+            String autor = scanner.nextLine();
+            libro.setAutor(autor);
 
-            System.out.println("Ingrese el nuevo ISBN (deje en blanco si no desea cambiarlo):");
-            String nuevoIsbn = scanner.nextLine();
-            if (!nuevoIsbn.isEmpty()) {
-                libroActualizar.setIsbn(nuevoIsbn);
-            }
+            System.out.println("Ingrese el isbn del libro:");
+            String isbn = scanner.nextLine();
+            libro.setIsbn(isbn);
 
-            // Eliminar libro.
-            System.out.println("Ingrese el ID del libro a eliminar:");
-            int libroIdStr2 = scanner.nextInt();
+            libroDao.crearLibro(libro);
 
-
-            LibroDao libroDao2 = new LibroDao();
-            libroDao.eliminarLibro(libroIdStr2);
-
-
-            // Guardar los cambios en la base de datos
-            libroDao.actualizarLibro(libroActualizar); // Usa libroActualizar en lugar de libro
-
-            System.out.println("Libro actualizado exitosamente.");
+            System.out.println("Libro creado exitosamente.");
         } else {
-            System.out.println("No se encontró el libro con el ID especificado.");
+            System.out.println("No se creo ningún libro.");
         }
-        //préstamo de libro
-        System.out.println("Ingrese los datos para el préstamo:");
-        Prestamo prestamo = new Prestamo();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        System.out.println("Fecha del préstamo:");
-        String fechaPrestamo = scanner.nextLine();
-        prestamo.setFechaPrestamo(dateFormat.parse(fechaPrestamo));
+        /////////////////////////////////////////////
 
-        System.out.println("Ingrese la fecha de devolución:");
-        String devolucion = scanner.nextLine();
-        prestamo.setFechaDevolucion(dateFormat.parse(devolucion));
+        System.out.println("¿DESEA HACER UN PRÉSTAMO? (si/no)");
+        String hacerPrestamo = scanner.nextLine().toLowerCase();
 
-        prestamo.setIdUsuario(usuario);
+        if (hacerPrestamo.equals("si")) {
+            Prestamo prestamo = new Prestamo();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        prestamo.setIdLibro(libro);
+            System.out.println("Fecha en que se hizo el préstamo del libro (año-mes-día):");
+            String fechaPrestamo = scanner.nextLine();
+            prestamo.setFechaPrestamo(dateFormat.parse(fechaPrestamo));
 
-        // Crear instancia del DAO y guardar el libro
-        PrestamoDao prestamoDao = new PrestamoDao();
-        prestamoDao.crearPrestamo(prestamo); // Método para guardar el libro en la base de datos.
+            System.out.println("Ingrese la fecha de devolución del libro (año-mes-día):");
+            String devolucion = scanner.nextLine();
+            prestamo.setFechaDevolucion(dateFormat.parse(devolucion));
 
-        System.out.println("Préstamo realizado exitosamente.");
+            prestamo.setActivo(true);
+
+            System.out.println("Id del usuario al que se le prestó el libro:");
+            int userBook = scanner.nextInt();
+            scanner.nextLine();
+
+            Usuario obtenerIdUsuario = usuarioDao.obtenerUsuarioId(userBook);
+
+            prestamo.setIdUsuario(obtenerIdUsuario);
+
+            System.out.println("Ingrese el Id del libro préstado.");
+            int prestarBook = scanner.nextInt();
+            scanner.nextLine();
+
+            Libro obtenerIdLibro = libroDao.obtenerLibroId(prestarBook);
+            prestamo.setIdLibro(obtenerIdLibro);
+
+            prestamoDao.crearPrestamo(prestamo);
+
+            System.out.println("Préstamo realizado exitosamente.");
+        } else {
+            System.out.println("No se hizo ningún préstamo.");
+        }
+
+        /////////////////////////////////////////////
+
+        System.out.println("¿DESEA DEVOLVER UN LIBRO?");
+        String returnLibro = scanner.nextLine().toLowerCase();
+
+        if (returnLibro.equals("si")) {
+            System.out.println("Ingrese el Id del préstamo hecho para ese libro.");
+            int returnBook = scanner.nextInt();
+            scanner.nextLine();
+
+            Prestamo obtenerIdPrestamo = prestamoDao.obtenerPrestamoId(returnBook);
+
+            if (obtenerIdPrestamo != null && obtenerIdPrestamo.isActivo()) {
+
+                obtenerIdPrestamo.setActivo(false);
+                obtenerIdPrestamo.setIdLibro(null);
+
+                prestamoDao.actualizarPrestamo(obtenerIdPrestamo);
+
+                System.out.println("El libro ha sido devuelto correctamente.");
+            } else {
+                System.out.println("No se encontró un préstamo activo con ese ID.");
+            }
+        } else {
+            System.out.println("No se ha devuelto ningún libro.");
+        }
+
+        /////////////////////////////////////////////
+
+        System.out.println("¿DESEA ACTUALIZAR UN LIBRO? (si/no)");
+        String updateLibro = scanner.nextLine().toLowerCase();
+
+        if (updateLibro.equals("si")) {
+            System.out.println("Ingrese el id del libro a actualizar:");
+            int libroId = scanner.nextInt();
+            scanner.nextLine();
+
+            Libro actualizarLibro = libroDao.obtenerLibroId(libroId);
+
+            if (actualizarLibro != null) {
+                System.out.println("Ingrese el nuevo título del libro:");
+                String nuevoTitulo = scanner.nextLine();
+                if (!nuevoTitulo.isEmpty()) {
+                    actualizarLibro.setTitulo(nuevoTitulo);
+                }
+
+                System.out.println("Ingrese el autor del libro:");
+                String nuevoAutor = scanner.nextLine();
+                if (!nuevoAutor.isEmpty()) {
+                    actualizarLibro.setAutor(nuevoAutor);
+                }
+
+                System.out.println("Ingrese el ISBN del libro:");
+                String nuevoIsbn = scanner.nextLine();
+                if (!nuevoIsbn.isEmpty()) {
+                    actualizarLibro.setIsbn(nuevoIsbn);
+                }
+
+                libroDao.actualizarLibro(actualizarLibro);
+
+                System.out.println("El libro se ha actualizado exitosamente.");
+            } else {
+                System.out.println("No se encontró el libro con el ID especificado.");
+            }
+        }
+
+        /////////////////////////////////////////////
+
+        System.out.println("¿DESEA ELIMINAR UN LIBRO? (si/no)");
+        String delete = scanner.nextLine().toLowerCase();
+        if (delete.equals("si")) {
+            System.out.println("Ingrese el ID del libro a eliminar:");
+            String libroIdStr2 = scanner.nextLine();
+            int libroId2 = Integer.parseInt(libroIdStr2);
+
+            // Verificar si el libro existe.
+            Libro libroExistente = libroDao.obtenerLibroId(libroId2);
+
+            if (libroExistente == null) {
+                System.out.println("No se encontró ningún libro con el ID especificado.");
+            } else {
+                // Verificar si el libro tiene un préstamo activo.
+                Prestamo prestamoActivo = prestamoDao.obtenerPrestamoPorLibroId(libroId2);
+
+                if (prestamoActivo != null && prestamoActivo.isActivo()) {
+                    System.out.println("No se puede eliminar el libro porque tiene un préstamo activo.");
+                } else {
+                    libroDao.eliminarLibro(libroId2);
+                    System.out.println("El libro ha sido eliminado correctamente.");
+                }
+            }
+        } else {
+            System.out.println("Ningún libro será eliminado.");
+        }
+
     }
 }
