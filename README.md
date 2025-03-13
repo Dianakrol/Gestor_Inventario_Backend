@@ -25,10 +25,10 @@ Este repositorio contiene una serie de ejercicios prácticos para aplicar los pr
 ## 🚀 ¿Cómo ejecutar el proyecto?
 1. Clona el repositorio:  
 
-   git clone https://github.com/Dianakrol/nde-poo-backend-taller-1.git
+   git clone https://github.com/Dianakrol/Gestor_Inventario_Backend.git
    
 Entra a la carpeta del proyecto:
 
-cd nde-poo-backend-taller-1
+cd Gestor_Inventario_Backend
 
 Abre la solución en Visual Studio y ejecuta el proyecto.
